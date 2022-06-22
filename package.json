@@ -1,0 +1,25 @@
+{
+  "name": "@carits-qa/codeceptjs-issues",
+  "description": "A place to upload examples of issues with codeceptjs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aruiz-caritsqa/codeceptjs-issues.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aruiz-caritsqa/codeceptjs-issues/issues"
+  },
+  "homepage": "https://github.com/aruiz-caritsqa/codeceptjs-issues#readme",
+  "dependencies": {
+    "codeceptjs": "^3.3.3"
+  },
+  "devDependencies": {
+    "puppeteer": "^14.4.1"
+  }
+}
