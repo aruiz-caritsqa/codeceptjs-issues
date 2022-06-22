@@ -25,18 +25,42 @@ Scenario.skip('Login to demoqa', async ({ I, LoginPage }) => {
   I.wait(1)
 });  
 
-Scenario('Open book from /books page - prove Proxy added to container.js works as expected', async ({ I, BooksPage, BookPage }) => {
+Scenario.skip('Open book from /books page - prove Proxy added to container.js works as expected', async ({ I, BooksPage, BookPage }) => {
   I.amOnPage('/books');
   BooksPage.openNthBook(2);
   I.seeInCurrentUrl('/books?book=')
+
+  // Prove container.js proxy works
   I.click(BooksPage[`${prefix}addNewRecordButton`]())
   I.dontSeeInCurrentUrl('/books?book=')
 
+  // Prove container.js proxy works
   I.click(BookPage[`${prefix}login`]());
   I.seeInCurrentUrl('/login');
 });
 
-Scenario('Open book from /books page - expected fail when BooksPage calls a non-existant function', async ({ I, BooksPage }) => {
+Scenario.skip('Open book from /books page - expected fail when BooksPage calls a non-existant function ${prefix}searchBox function', async ({ I, BooksPage }) => {
   I.amOnPage('/books');
-  BooksPage.search('Git');
+  global.expect(() => BooksPage.search('Git')).to.throw('this[prefix] is not a function');
 });
+
+Scenario('Validating Book Data using Page Object Classes with unmiss for capturing missing methods', async ({ I, BooksPage, BookPage }) => {
+  I.amOnPage('/books');
+  BooksPage.openNthBook(2);
+  I.seeInCurrentUrl('/books?book=')
+
+  let url = await I.grabCurrentUrl();
+  const [, isbn] = url.match(/books\?book=([0-9]+)$/);
+
+  // validate using customLocator
+  const valueByCustomLocator = await I.grabTextFrom(`${prefix}userName-value`);
+  I.expect(isbn).to.equal(valueByCustomLocator);
+
+  // validate using Page Object Class function
+  const valueByPoFunc = await I.grabTextFrom(BookPage[`${prefix}userName-value`]());
+  I.expect(isbn).to.equal(valueByPoFunc);
+
+  // validate using Page Object Class call
+  await BookPage.validateIsbn(isbn);
+});
+
