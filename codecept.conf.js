@@ -1,11 +1,19 @@
 const { setHeadlessWhen, setCommonPlugins } = require('@codeceptjs/configure');
 
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+const { expect } = chai;
+global.expect = expect;
+
+
 // turn on headless mode when running with HEADLESS=true environment variable
 // export HEADLESS=true && npx codeceptjs run
 setHeadlessWhen(process.env.HEADLESS);
 
 // enable all common plugins https://github.com/codeceptjs/configure#setcommonplugins
 setCommonPlugins();
+
 
 exports.config = {
   tests: './test/*.test.js',
