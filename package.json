@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/codeceptjs run-workers 4 --verbose",
+    "debug": "node --inspect ./node_modules/.bin/codeceptjs run --verbose"
   },
   "repository": {
     "type": "git",
@@ -17,11 +18,17 @@
   },
   "homepage": "https://github.com/aruiz-caritsqa/codeceptjs-issues#readme",
   "dependencies": {
+    "@wdio/selenium-standalone-service": "^7.20.3",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
-    "codeceptjs": "^3.3.3"
+    "chromedriver": "^103.0.0",
+    "codeceptjs": "^3.3.3",
+    "codeceptjs-pixelmatchhelper": "^1.0.5",
+    "jimp": "^0.16.1"
   },
   "devDependencies": {
-    "puppeteer": "^14.4.1"
+    "playwright": "^1.22.2",
+    "puppeteer": "^14.4.1",
+    "webdriverio": "^7.20.3"
   }
 }

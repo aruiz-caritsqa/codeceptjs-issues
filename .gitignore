@@ -1,2 +1,4 @@
 /node_modules/
 /output/
+/visreg/screenshots/diff/
+**/.DS_Store
